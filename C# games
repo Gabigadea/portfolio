@@ -1,0 +1,96 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class PlayerMove : MonoBehaviour
+{
+    public FixedJoystick moveJoy;
+
+    private float velocidadePlayer;
+    public float velocidadeAndar = 5;
+    public float velocidadeCorrida = 10;
+    public Camera cameraPlayer;
+    private Vector3 direcoes;
+    private Animator anim;
+    public int VidaPlayer = 100;
+
+   
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //programação do joystick aqui
+
+        float InputX = Input.GetAxis("Horizontal");
+        float InputZ = Input.GetAxis("Vertical");
+
+        //float InputX = moveJoy.Horizontal;
+        //float InputZ = moveJoy.Vertical;
+    
+
+        direcoes = new Vector3(InputX, 0, InputZ);
+        if (InputX != 0 || InputZ != 0)
+        {
+            var camrotation = cameraPlayer.transform.rotation;
+            camrotation.x = 0;
+            camrotation.z = 0;
+            anim.SetBool("walk", true);
+            transform.Translate(0, 0, velocidadePlayer * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direcoes) * camrotation, 5 * Time.deltaTime);
+
+          
+
+            if (InputX != 0)
+            {
+                anim.SetBool("Run", true);
+                velocidadePlayer = velocidadeCorrida;
+            }
+            else
+            {
+                anim.SetBool("Run", false);
+               
+                velocidadePlayer = velocidadeAndar;
+               
+            }
+        }
+        else if (InputZ == 0 & InputX == 0) 
+        {
+            anim.SetBool("Run", false);
+            anim.SetBool("walk", false);
+        }
+        //Danos do player
+        if (VidaPlayer <= 0)
+        {
+
+
+            anim.SetBool("morte", true);
+            velocidadePlayer = 0;
+            velocidadeCorrida = 0;
+            velocidadeAndar = 0;
+            StartCoroutine("morte");
+        }
+    }
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.tag == "maoInimigo")
+        {
+            VidaPlayer -= 80;
+
+        }
+    }
+    IEnumerator morte()
+    {
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene("You Died");
+
+    }
+   
+    
+
+   
+}
