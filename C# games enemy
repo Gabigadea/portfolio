@@ -1,0 +1,52 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
+
+
+public class inimigo : MonoBehaviour
+
+{
+    private Animator animInimigo;
+    private NavMeshAgent navMesh;
+    private GameObject Player;
+    public float velocidadeInimigo;
+    public GameObject maoInimigo;
+    void Start()
+    {
+        animInimigo = GetComponent<Animator>();
+        navMesh = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        Player = GameObject.FindWithTag("Player");
+        navMesh.speed = velocidadeInimigo;
+        maoInimigo.SetActive(false);
+
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        navMesh.destination = Player.transform.position;
+        animInimigo.SetBool("Run", true);
+
+        if (Vector3.Distance(transform.position, Player.transform.position) < 2.7f)
+        {
+            navMesh.speed = 0;
+            maoInimigo.SetActive(true);
+            animInimigo.SetBool("attack", true);
+            StartCoroutine("Ataque");
+
+        }
+
+    }
+    
+    IEnumerator Ataque()
+    {
+        yield return new WaitForSeconds(4.0f);
+        animInimigo.SetBool("attack", false);
+        yield return new WaitForSeconds(0.6f);
+        maoInimigo.SetActive(false);
+        navMesh.speed = velocidadeInimigo;
+    }
+}
