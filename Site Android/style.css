@@ -1,0 +1,169 @@
+@font-face {
+    font-family: 'droids';
+    src: url('fontes/idroid.otf') format('opentype');
+}
+    body {
+        margin: 0%;
+    }
+    header {
+        text-align: center;
+        background-image: linear-gradient(to top, white, #69fa64, #16a132);
+        font-family: Helvetica, sans-serif;
+    }
+    header>h1{
+        margin: 0%;
+        padding-top: 3%;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 55px;
+        color: rgba(22, 21, 21, 0.952);
+    }
+    header>p{
+        font-family: 'droids', Helvetica, sans-serif;
+        margin-top: 14px;
+    }
+    nav{
+        box-shadow: 1px 2px rgb(68, 170, 68);
+        padding: 2%;
+        width: fit-content;
+        margin: auto;
+        padding: 0.5%;
+        margin-top: 5%;
+    }
+    nav>a {
+        text-decoration: none;
+        color: black;
+        margin: 10px;
+        font-weight: bold;
+    }
+    nav>a:hover {
+        color: #106421;
+        background-color: #99fc96;
+        border-radius: 25%;
+    }
+    main{
+        background-color: white;
+        max-width: 1000px;
+        min-width: 300px;
+        margin: auto;
+        margin-top: 5%;
+        margin-right: 13%;
+        margin-left: 13%;
+
+    }
+    main>section>h2{
+        font-family: 'droids', Helvetica, sans-serif;
+        color: #106421;
+        text-align: center;
+        font-size: 35px;
+        margin: 5%;
+    }
+    main>section>h3{
+        font-family: 'droids', Helvetica, sans-serif;
+        color: #106421;
+        font-size: 20px;
+    }
+    main>section>p{
+        font-size: 17px;
+        padding: 1%;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 25px;
+        text-align: justify;
+
+    }
+    main>section>p>a {
+        text-decoration: none;
+        color: #106421;
+    }
+    main>section>p>a:hover {
+        text-decoration: underline;
+    }
+    main>section>picture>img {
+        display: block;
+        margin: auto;
+        width: 90%;
+    }
+    main>section>img {
+        display: block;
+        margin: auto;
+        width: 50%;
+    }
+    .aprender h3{
+        background-color: #16a132 ;
+        text-align: center;
+        font-family: 'droids', Helvetica, sans-serif;
+        color: white;
+        font-size: 22px;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        margin: 0%;
+        border-top-right-radius: 13px;
+        border-top-left-radius: 13px;
+        box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.466);
+    }
+    .quadro {
+        background-color: rgba(113, 255, 113, 0.479);
+        border-bottom-right-radius: 13px;
+        border-bottom-left-radius: 13px;
+        box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.514);
+    }
+    .quadro p {
+        font-size: 17px;
+        padding: 1%;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 25px;
+        margin: 0%;
+        text-align: justify;
+
+    }
+    .quadro p>a {
+        text-decoration: none;
+        color: #106421;
+    }
+    .quadro p>a:hover {
+        text-decoration: underline;
+    }
+    aside li {
+        padding-top: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+
+    aside ul{
+        font-family: Arial, Helvetica, sans-serif;
+        columns: 2;
+    }
+    aside p {
+        font-size: 17px;
+        padding: 1%;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 25px;
+        text-align: justify;
+    }
+
+   div.video {
+    background-color: #106421;
+    margin-bottom: 30px;
+    padding: 20px;
+    padding-bottom: 54.2%;
+    position: relative;
+   }
+
+   div.video>iframe {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+   }
+
+    footer>p{
+    background-color:#16a132;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 1%;
+    text-align: center;
+    margin: auto;
+
+    }
+
+
