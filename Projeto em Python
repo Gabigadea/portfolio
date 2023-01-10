@@ -1,0 +1,256 @@
+#Algoritmo: Criptografia RSA
+import os, sys, time
+
+#cores terminal
+red = '\033[31m'
+close = '\033[m'
+blue = '\033[34m'
+yellow = '\033[33m'
+purple = '\033[35m'
+green = '\033[32m'
+ciano = '\033[36m'
+red1 = '\033[1;31m'
+
+#cálculo dos primos
+p = 23
+q = 17
+n = p * q
+yn = (p-1) * (q-1)
+
+#Declaração da mensagem (dev)
+print(f'\n{yellow}Bem vindo Dev!{close}\n')
+
+PrintChave = (f'{purple}Escolha a chave de acesso.{close}')
+
+for char in PrintChave:     #Efeito de texto
+    sys.stdout.write(char)
+    sys.stdout.flush()
+    time.sleep(0.01)
+
+frase = str(input("\nDigite a mensagem: "))
+lenfrase = len(frase)
+
+while (lenfrase > 128):
+    max = (f'\n{red}Máximo de 128 caracteres atingido!{close}\n')
+    for char in max:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(0.01)
+
+    frase = str(input("\nDigite a mensagem: ")) 
+    lenfrase = len(frase)
+    if(lenfrase < 128):
+        break
+
+#Declaração da chave pública (dev)
+printpublic = (f'\n{purple}Escolha a chave pública{close}\n')
+
+for char in printpublic:
+    sys.stdout.write(char)
+    sys.stdout.flush()
+    time.sleep(0.01)
+
+obs = (f'{red}OBS: Digite apenas números ímpares.{close}\n')
+
+for char in obs:
+    sys.stdout.write(char)
+    sys.stdout.flush()
+    time.sleep(0.01)
+
+e = int(input("Digite a chave: "))
+
+while(e >= 9009):
+    printe = (f'\n{red}Esse número é muito alto.{close}\n')
+    for char in printe:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(0.01)
+
+    e = int (input("Digite a chave: \n"))
+    if(e < 9009):
+        break
+
+# Verificar se a chave pública é par e se corresponde as necessidades
+
+while(e == 99):
+    printeE = (f'\n{red}Esse número não corresponde a criptogradia{close}\n')
+    for char in printeE:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(0.01)
+    e = int (input("Digite a chave:\n"))
+
+if e % 2 == 0:
+    
+    
+    while(e % 2 != 1):
+        printeE = (f'\n{red}O número digitado é par, digite outro{close}\n')
+        for char in printeE:
+            sys.stdout.write(char)
+            sys.stdout.flush()
+            time.sleep(0.01)
+        e = int (input("Digite a chave:\n"))
+    else:
+        def mdc(x,y):
+            rest = 1
+            while(y != 0):
+                rest = x%y
+                x = y
+                y = rest
+            return x
+def mdc2 ():
+    if(mdc(n,e) == 1):
+        return e
+
+#Função de módulo
+def mod (a,b):
+    c=a%b
+    return c
+
+#Quebra da frase em blocos e congruência (cifra)
+#Tabela de letras ASCII
+def cifra (mensagem, n, e):
+    comp = len(mensagem)
+    i = 0
+    list1 = []
+    while (i < comp):
+        letra = mensagem[i]
+        m = ord(letra)
+        m = m ** e
+        c = mod(m,n)
+        list1.append(c)
+        i += 1
+    return list1
+os.system('cls')
+cifrado = cifra(frase, n, e)
+
+
+acesso = ("Sua chave de acesso é: \n")
+
+for char in acesso:
+    sys.stdout.write(char)
+    sys.stdout.flush()
+    time.sleep(0.01)
+print(cifrado)
+
+chave = ("\nSua chave pública é: \n")
+
+for char in chave:
+    sys.stdout.write(char)
+    sys.stdout.flush()
+    time.sleep(0.01)
+print(e)
+dica = (f'{red}dica: Guarde as chaves!{close}')
+for char in dica:
+    sys.stdout.write(char)
+    sys.stdout.flush()
+    time.sleep(0.01)
+
+#Chave privada
+def privada(yn,e):
+    d = 1
+    while(mod(d*e,yn)!=1):
+        d += 1
+    return d
+
+#Decifrar o texto
+def decifra (cifra, n, d):
+    leng = len(cifra)
+    i = 0
+    list2 = []
+    while (i < leng):
+        decif = cifra[i] ** d
+        texto = mod(decif,n)
+        letra = chr(texto)
+        list2.append(letra)
+        i += 1
+    return list2
+d = privada(yn,e)
+original = decifra(cifrado,n,d)
+
+#Menu de opções
+opcao = 0
+while opcao != 5:
+    choice = (f'\n{purple}O que deseja fazer agora?{close}\n ')
+
+    for char in choice:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(0.01)
+
+    print(f'\n({green}1{close}) Decifrar a mensagem\n'
+        f'({red1}2{close}) Ir para a página de usuário\n'
+            f'({ciano}3{close}) Finalizar programa\n'
+    )
+    escolha = int(input(f'Escolha entre {green}1{close}, {red1}2{close} e {ciano}3{close}: '))
+
+    #Decifrar a mensagem/chave de acesso
+    if escolha ==1:
+        print("\nSua mensagem/frase decifrada é: \n",original)
+
+    # Página do usuário
+    elif escolha ==2:
+
+        os.system('cls')
+
+        print(f'{yellow}página de usuário{close}\n')
+
+        publicE = str(e)
+        cifradoSTR = str(cifrado)
+        carg = (f'{purple}Qual é seu cargo?{close}\n')
+
+        for char in carg:
+            sys.stdout.write(char)
+            sys.stdout.flush()
+            time.sleep(0.01)
+
+        cargo = str(input("Digite seu cargo: \n"))
+        Rcargo = "inspetor"
+        
+        while(cargo.lower() != Rcargo.lower()):
+            cargo = input("Digite seu cargo:")
+
+        if(cargo.lower() == Rcargo.lower()):
+            ca = (f'\n{purple}Digite a chave de acesso{close}\n')
+
+            for char in ca:
+                sys.stdout.write(char)
+                sys.stdout.flush()
+                time.sleep(0.01)
+            ChaveAcesso = input("Chave de acesso: ")
+
+            while(ChaveAcesso != cifradoSTR):
+                ChaveAcesso = input("Chave de acesso: ")
+                ChaveAcesso.lower()
+
+            if(ChaveAcesso == cifradoSTR):
+                cp = (f'\n{purple}Digite a chave pública{close}\n')
+
+                for char in cp:
+                    sys.stdout.write(char)
+                    sys.stdout.flush()
+                    time.sleep(0.01)
+
+                publi = input("Chave Publica: \n")
+
+                if(publi == publicE):
+
+                     auto = (f'{yellow}Acesso liberado!{close}')
+                     for char in auto:
+                        sys.stdout.write(char)
+                        sys.stdout.flush()
+                        time.sleep(0.01)
+                     break
+                while(publi != publicE):
+                    publi = input("Chave Publica: ")
+                    if(publi == publicE):
+                        print(f'{yellow}Acesso liberado!{close}')
+                        break
+
+    #Finalizar o programa
+    elif escolha ==3:
+        print(f'{yellow}FIM DO PROGRAMA!{close}')
+        break
+
+    else:
+        print(f'{red}Escolha inválida!{close}')
